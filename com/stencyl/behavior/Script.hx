@@ -2027,6 +2027,26 @@ class Script
 		}			
 	}
 	
+	public static function playSoundfrommpos(clip:Sound,pos:Float)     // EDIT1
+	{
+		if(clip != null)
+		{				
+			for(i in 0...CHANNELS)
+			{
+				var sc = engine.channels[i];
+				
+				if(sc.currentSound == null)
+				{
+					//trace("Play sound on channel: " + i);
+					sc.playSoundfrompos(clip,pos);
+					return;
+				}
+			}
+			
+			trace("No channels available to play sound");
+		}			
+	}
+	
 	/**
 	* Loop a specific SoundClip resource (use playSound() to play only once)
 	*/
@@ -2057,6 +2077,12 @@ class Script
 	{
 		var sc:SoundChannel = engine.channels[channelNum];		
 		sc.playSound(clip);			
+	}
+	
+	public static function playSoundfromposOnChannel(clip:Sound,pos:Float,channelNum:Int)  //EDIT1
+	{
+		var sc:SoundChannel = engine.channels[channelNum];		
+		sc.playSoundfrompos(clip,pos);			
 	}
 	
 	/**
