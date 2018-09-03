@@ -83,6 +83,52 @@ class SoundChannel
 		return currentSound;
 	}
 	
+	public function playSoundfrompos(clip:Sound,pos: Float):openfl.media.SoundChannel
+	{			
+		if(currentSound != null)
+		{
+			currentSound.stop();
+		}
+		
+		if(clip != null)
+		{
+			if (pos >= Script.getSoundLength(clip))         // if position is non-playable, play it from 0
+			{
+			pos = 0;
+			}
+			if (0 >= pos)
+			{
+			pos = 0;	
+			}
+			
+			
+			clip.volume = volume * masterVolume;
+			currentClip = clip;
+			currentSound = clip.play(channelNum,pos);
+			
+			if(currentSound == null)
+			{
+				currentClip = null;
+				return null;
+			}
+			
+			setVolume(volume);
+			
+			currentSound.addEventListener(Event.SOUND_COMPLETE, stopped);
+		}
+		
+		position = pos;
+		
+		if(clip != null)
+		{
+			currentSource = clip.src;
+		}
+		
+		looping = false;
+		
+		return currentSound;
+	}
+	
 	public function loopSound(clip:Sound):openfl.media.SoundChannel
 	{
 		if(currentSound != null)
