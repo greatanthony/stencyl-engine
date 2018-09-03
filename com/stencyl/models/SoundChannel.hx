@@ -4,6 +4,7 @@ import openfl.events.Event;
 import com.stencyl.Engine;
 import com.stencyl.models.Sound;
 import motion.Actuate;
+import com.stencyl.behavior.Script;
 
 import openfl.media.SoundTransform;
 
